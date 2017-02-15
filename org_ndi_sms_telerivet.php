@@ -64,8 +64,10 @@ class org_ndi_sms_telerivet extends CRM_SMS_Provider {
   function __construct($provider, $skipAuth = TRUE) {
     // Instantiate the Telerivet client
     $this->provider = $provider;
-    $api = new Telerivet_API($provider['api_params']['api_key']);
-    $this->tr = $api->initProjectById($provider['api_params']['project_id']);
+    if(isset($provider['api_params'])){
+      $api = new Telerivet_API($provider['api_params']['api_key']);
+      $this->tr = $api->initProjectById($provider['api_params']['project_id']);
+    }
   }
 
   /**
@@ -118,7 +120,7 @@ class org_ndi_sms_telerivet extends CRM_SMS_Provider {
   }
 
   function inbound() {
-    $this->provider['api_params']['secret']; // TODO check for secret
+    // $this->provider['api_params']['secret']; // TODO check for secret
     return parent::processInbound( $this->retrieve('from_number', 'String'), $this->retrieve('content', 'String'), NULL, $this->retrieve('id', 'String') );
   }
 }
