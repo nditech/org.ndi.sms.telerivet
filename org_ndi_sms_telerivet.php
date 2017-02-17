@@ -78,7 +78,12 @@ class org_ndi_sms_telerivet extends CRM_SMS_Provider {
    *
    */
   static function &singleton($providerParams = array(), $force = FALSE) {
-    $providerID = CRM_Utils_Array::value('provider_id', $providerParams);
+    if(isset($providerParams['provider'])){
+      $providers = CRM_SMS_BAO_Provider::getProviders(NULL, array('name' => $providerParams['provider']));
+      $providerID = current($providers)['id'];
+    }else{
+      $providerID = CRM_Utils_Array::value('provider_id', $providerParams);
+    }
     $skipAuth   = $providerID ? FALSE : TRUE;
     $cacheKey   = (int) $providerID;
 
@@ -120,7 +125,10 @@ class org_ndi_sms_telerivet extends CRM_SMS_Provider {
   }
 
   function inbound() {
-    // $this->provider['api_params']['secret']; // TODO check for secret
+    if(CRM_Utils_Request::retrieve('secret', 'String') != $this->provider['api_params']['secret']){
+      CRM_Core_Error::debug_log_message("Bad secret.");
+      return;
+    };
     return parent::processInbound( $this->retrieve('from_number', 'String'), $this->retrieve('content', 'String'), NULL, $this->retrieve('id', 'String') );
   }
 }
