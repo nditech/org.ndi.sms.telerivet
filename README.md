@@ -1,8 +1,6 @@
 # Telerivet CiviCRM integration
 
-This extension integrates https://telerivet.com/ with CiviCRM, allowing you to use send and receive SMS with CiviCRM anywhere that you can send and receive SMS.
-
-All you need is a telerivet account and an Android or IOS phone.
+This CiviCRM extension integrates https://telerivet.com/ allowing you to use send and receive SMS with CiviCRM anywhere that you can send and receive SMS using an Android or IOS phone.
 
 ## Installation
 
