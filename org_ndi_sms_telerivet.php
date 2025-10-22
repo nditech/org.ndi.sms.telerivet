@@ -82,7 +82,7 @@ class org_ndi_sms_telerivet extends CRM_SMS_Provider {
       $providers = CRM_SMS_BAO_Provider::getProviders(NULL, array('name' => $providerParams['provider']));
       $providerID = current($providers)['id'];
     }else{
-      $providerID = CRM_Utils_Array::value('provider_id', $providerParams);
+      $providerID = $providerParams['provider_id'] ?? NULL;
     }
     $skipAuth   = $providerID ? FALSE : TRUE;
     $cacheKey   = (int) $providerID;
