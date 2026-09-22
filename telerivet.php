@@ -39,7 +39,7 @@ function telerivet_civicrm_uninstall() {
   if ($optionID)
     CRM_Core_BAO_OptionValue::del($optionID);
 
-  $filter    =  array('name'  => 'org.ndi.sms.telerivet');
+  $filter    =  ['name'  => 'org.ndi.sms.telerivet'];
   $Providers =  CRM_SMS_BAO_Provider::getProviders(False, $filter, False);
   if ($Providers){
     foreach($Providers as $key => $value){
@@ -58,7 +58,7 @@ function telerivet_civicrm_enable() {
   if ($optionID)
     CRM_Core_BAO_OptionValue::setIsActive($optionID, TRUE);
 
-  $filter    =  array('name' => 'org.ndi.sms.telerivet');
+  $filter    =  ['name' => 'org.ndi.sms.telerivet'];
   $Providers =  CRM_SMS_BAO_Provider::getProviders(False, $filter, False);
   if ($Providers){
     foreach($Providers as $key => $value){
@@ -79,7 +79,7 @@ function telerivet_civicrm_disable() {
   if ($optionID)
     CRM_Core_BAO_OptionValue::setIsActive($optionID, FALSE);
 
-  $filter    =  array('name' =>  'org.ndi.sms.telerivet');
+  $filter    =  ['name' =>  'org.ndi.sms.telerivet'];
   $Providers =  CRM_SMS_BAO_Provider::getProviders(False, $filter, False);
   if ($Providers){
     foreach($Providers as $key => $value){

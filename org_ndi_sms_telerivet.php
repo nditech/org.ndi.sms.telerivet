@@ -41,7 +41,7 @@ class org_ndi_sms_telerivet extends CRM_SMS_Provider {
    * provider details
    * @var	string
    */
-  protected $_providerInfo = array();
+  protected $_providerInfo = [];
 
 
   /**
@@ -51,7 +51,7 @@ class org_ndi_sms_telerivet extends CRM_SMS_Provider {
    * @var object
    * @static
    */
-  static private $_singleton = array();
+  static private $_singleton = [];
 
   /**
    * Constructor
@@ -77,9 +77,9 @@ class org_ndi_sms_telerivet extends CRM_SMS_Provider {
    * @static
    *
    */
-  static function &singleton($providerParams = array(), $force = FALSE) {
+  static function &singleton($providerParams = [], $force = FALSE) {
     if(isset($providerParams['provider'])){
-      $providers = CRM_SMS_BAO_Provider::getProviders(NULL, array('name' => $providerParams['provider']));
+      $providers = CRM_SMS_BAO_Provider::getProviders(NULL, ['name' => $providerParams['provider']]);
       $providerID = current($providers)['id'];
     }else{
       $providerID = CRM_Utils_Array::value('provider_id', $providerParams);
@@ -88,7 +88,7 @@ class org_ndi_sms_telerivet extends CRM_SMS_Provider {
     $cacheKey   = (int) $providerID;
 
     if (!isset(self::$_singleton[$cacheKey]) || $force) {
-      $provider = array();
+      $provider = [];
       if ($providerID) {
         $provider = CRM_SMS_BAO_Provider::getProviderInfo($providerID);
       }
@@ -108,7 +108,7 @@ class org_ndi_sms_telerivet extends CRM_SMS_Provider {
   function send($recipients, $header, $message, $jobID = NULL, $userID = NULL) {
 
     try{
-      $message = $this->tr->sendMessage(array( 'content' => $message, 'to_number' => $header['To'] ));
+      $message = $this->tr->sendMessage([ 'content' => $message, 'to_number' => $header['To'] ]);
     }catch(Exception $e) {
       return PEAR::raiseError( $e->getMessage(), $e->getCode(), PEAR_ERROR_RETURN );
     }
