@@ -37,7 +37,7 @@ function telerivet_civicrm_install() {
 function telerivet_civicrm_uninstall() {
   $optionID = CRM_Core_DAO::getFieldValue('CRM_Core_DAO_OptionValue','telerivet','id','name');
   if ($optionID)
-    CRM_Core_BAO_OptionValue::del($optionID);
+    CRM_Core_BAO_OptionValue::deleteRecord(['id' => $optionID]);
 
   $filter    =  array('name'  => 'org.ndi.sms.telerivet');
   $Providers =  CRM_SMS_BAO_Provider::getProviders(False, $filter, False);
